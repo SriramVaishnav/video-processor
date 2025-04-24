@@ -59,7 +59,8 @@ io.on("connection", (socket) => {
     recordedChunks = [];
     fs.readFile("temp_upload/" + data.filename, async (err, file) => {
       const processing = await axios.post(
-        `${process.env.NEXT_API_HOST}recording/${data.userId}/processing`
+        `${process.env.NEXT_API_HOST}recording/${data.userId}/processing`,
+        { filename: data.filename }
       );
       if (processing.data.status !== 200)
         return console.log("❌ Error processing video");
